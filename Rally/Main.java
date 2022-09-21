@@ -11,30 +11,27 @@ public class Main {
         List<Integer> locates = new ArrayList<Integer>();
 
         for (int i = 0; i < people; i++) {
-
             locates.add(sc.nextInt());
-
         }
 
-        int sum = locates.stream().mapToInt(Integer::intValue).sum();
+        int min = Integer.MAX_VALUE;
 
-        int p = sum / people;
+        for (int i = 1; i <= 100; i++) {
 
-        if (sum % people != 0) {
-            p++;
+            List<Integer> hp = new ArrayList<Integer>();
+
+            for (int j = 0; j < people; j++) {
+                hp.add((locates.get(j) - i) * (locates.get(j) - i));
+            }
+
+            int sumHp = hp.stream().mapToInt(Integer::intValue).sum();
+
+            if (min > sumHp) {
+                min = sumHp;
+            }
         }
 
-        List<Integer> hp = new ArrayList<Integer>();
-
-        for (int i = 0; i < people; i++) {
-
-            hp.add((locates.get(i) - p) * (locates.get(i) - p));
-
-        }
-
-        int sumHp = hp.stream().mapToInt(Integer::intValue).sum();
-
-        System.out.println(sumHp);
+        System.out.println(min);
 
         // System.out.println(people);
 
